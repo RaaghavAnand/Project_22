@@ -5,9 +5,13 @@ const World = Matter.World;
 const Bodies = Matter.Bodies;
 const Body = Matter.Body;
 
+var options={
+	restitution: 1.0
+}
+
 var packageSprite_options ={
-	restitution: 1,
-	dense: 5
+	restitution: 1.0,
+	density: 5
 }
 
 var groundSprite_opt ={
@@ -25,7 +29,7 @@ function setup() {
 	rectMode(CENTER);
 	
 
-	packageSprite=createSprite(width/2, 80, 10,10);
+	packageSprite=createSprite(width/2, 80, 10,10,);
 	packageSprite.addImage(packageIMG)
 	packageSprite.scale=0.2
 
@@ -40,7 +44,7 @@ function setup() {
 	engine = Engine.create();
 	world = engine.world;
 
-	packageBody = Bodies.circle(width/2 , 200 , 5 , {restitution:3, isStatic:true});
+	packageBody = Bodies.circle(width/2 , 200 , 5 , packageSprite_options);
 	World.add(world, packageBody);
 	
 
@@ -60,6 +64,8 @@ function draw() {
   console.log(packageSprite_options);
 
  keyPressed();
+
+  
 
   Engine.update(engine);
   packageSprite.x= packageBody.position.x;
